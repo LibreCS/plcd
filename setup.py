@@ -65,7 +65,7 @@ setup(
     author="LibreCS",  # Optional
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email="",  # Optional
+    #author_email="",  # Optional
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -74,12 +74,12 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        "Development Status :: 3 - Alpha",
+        #"Development Status :: 3 - Alpha",
         # Indicate who your project is intended for
-        "Intended Audience :: Developers",
-        "Topic :: Software Development :: Build Tools",
+        #"Intended Audience :: Developers",
+        #"Topic :: Software Development :: Build Tools",
         # Pick your license as you wish
-        "License :: OSI Approved :: MIT License",
+        #"License :: OSI Approved :: MIT License",
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate you support Python 3. These classifiers are *not*
         # checked by 'pip install'. See instead 'python_requires' below.
@@ -96,7 +96,7 @@ setup(
     # Note that this is a list of additional keywords, separated
     # by commas, to be used to assist searching for the distribution in a
     # larger catalog.
-    keywords="sample, setuptools, development",  # Optional
+    #keywords="sample, setuptools, development",  # Optional
     # When your source code is in a subdirectory under the project root, e.g.
     # `src/`, it is necessary to specify the `package_dir` argument.
     package_dir={"": "src"},  # Optional
