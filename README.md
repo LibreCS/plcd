@@ -4,14 +4,18 @@
 
 # `$ pip install plcd`
 
+
+## Features
+- Uptime detection, monitoring, and logging
+- Automatic port sniffing and controller detection
+
 ## Requirements
 - Python 3.7 or higher `# apt-get install python3`
 - Pin 22.04 or higher `# apt-get install python3-pip`
 - Network connection to PLC
 
 ## Supported Controllers
-- Siemens
-- Allen-Bradley Rockwell (Modern)
+All major PLC protocols, see the [list of controllers](https://github.com/LibreCS/plcd/blob/main/src/plcd/plc-ports.dat) for details
 
 ## Build from source
 #### Linux/macOS
@@ -29,7 +33,6 @@ py -m build
 ```
 
 ## Future Features
-- Port sniffing and automatic detection
 - Multi-controller monitoring
 - Controller state monitoring
 - Docker integration for continuous monitoring
@@ -38,3 +41,4 @@ py -m build
 This project is written in Python and is a great place to start contributing to open-source. Feel free to check the issues tab or implement your own features.
 
 ## Contributors
+[cpstrommen](https://github.com/cpstrommen) | [tcun](https://github.com/tcun)
