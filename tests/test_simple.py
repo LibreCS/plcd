@@ -2,10 +2,10 @@
 # testing in general, but rather to support the `find_packages` example in
 # setup.py that excludes installing the "tests" package
 
+import unittest
+
 SNIFF_TEST_IP = "185.199.109.153"
 SNIFF_TEST_PORT = 443
-
-import unittest
 
 from plcd.main import portSniff
 
