@@ -6,24 +6,31 @@ import socket
 import datetime
 import time
  
- 
+
 #=========== CONFIGURATION ===========================================
- 
+
 # set monitoring frequency (pings/min)
 UP_PING_FREQ = 5
 # set monitoring frequency when down (pings/min)
 DOWN_PING_FREQ = 3
 # print downtime interval (min)
 DOWN_PRINT_INT = 20
+# number of lines in 'plc-ports.dat'
+PLC_PORT_DEFINITIONS = 50
+# maxium acceptable port for input and sniffing
+PORT_SCAN_MAX = 50000
 #=====================================================================
-portName = [str(""), str("")]
-portNum = [int(), int()]
- 
+
+# initial array definitions
+portName = [str("")]*PLC_PORT_DEFINITIONS
+portNum = [int(0)]*PLC_PORT_DEFINITIONS
+
+
 # setting log file name & dir
 FILE = os.path.join(os.getcwd(), "plc_uptime.log")
- 
+
 def configure():
- 
+
     class bcolors:
         HEADER = '\033[95m'
         BLUE = '\033[94m'
@@ -34,33 +41,34 @@ def configure():
         ENDC = '\033[0m'
         BOLD = '\033[1m'
         UNDERLINE = '\033[4m'
- 
- 
-    addressInMsg = "Enter PLC Plant Network Address (ex. 10.48.84.XXX): "
- 
-    portIngest()
- 
+
+
+    addressInMsg = "Enter PLC plant IP address: "
+
+    # get host input
     hostUsrIn = input(addressInMsg)
- 
+
     if hostValid(hostUsrIn):
-        port = portSniff(hostUsrIn, portNum, portName)
-        print("\n"+portName[port]+" found on port "+portNum[port]+", connecting...")
-        return str(hostUsrIn)+":"+str(portNum[port])
- 
+        portIndex = portSniff(hostUsrIn, portNum)
+        if portIndex == "error:sniff":
+            print(bcolors.RED+"Error: No open ports found on host, try again"+bcolors.ENDC)
+            return "error"
+        else:
+            print("\nController type "+str(portName[portIndex])+" found on TCP port "+str(portNum[portIndex])+"Connecting...")
+            return str(hostUsrIn)+":"+str(portNum[portIndex])
+
     else:
         print("\n")
         if not hostValid(hostUsrIn):
             print(bcolors.RED+"Error: PLC IP address invalid, try again"+bcolors.ENDC)
-        if not portValid(portUsrIn):
-            print(bcolors.RED+"Error: PLC network port invalid, try again"+bcolors.ENDC)
         print("\n")
- 
+
         return "error"
- 
+
 def hostValid(hostUsrIn):
     # parse IP address for each quartet
     hostParse = hostUsrIn.split(".")
- 
+
     # check for 4 quartet length
     if len(hostParse) == 4:
         # proceed
@@ -73,17 +81,17 @@ def hostValid(hostUsrIn):
         return True   
     else:
         return False
- 
+
 def portValid(portUsrIn):
     # locking port as int
     port = int(portUsrIn)
- 
+
     # determining port in bounds
-    if int(port) > 0 & int(port) < 100000:
+    if int(port) > 0 & int(port) < PORT_SCAN_MAX:
         return True
     else:
         return False
- 
+
 def ping(host, port):
     # to ping a particular IP
     try:
@@ -104,28 +112,39 @@ def ping(host, port):
         s.close()
         return True
  
-def portSniff(inputAddress, portNum, portName):
-    for i in portNum:
-        if ping(inputAddress, i):
-            return i
- 
+def portSniff(inputAddress, portNum):
+    # status variable definitions
+    sniffStatus = [False]*PLC_PORT_DEFINITIONS
+    portsOpen = 0
+
+    # sniffing all given ports
+    for portIndex in range(0,PLC_PORT_DEFINITIONS):
+        if ping(str(inputAddress), int(portNum[portIndex])):
+            sniffStatus[portIndex] = True
+            portsOpen =+ 1
+            return portIndex
+
+    if portsOpen == 0:
+        return "error:sniff"
+
 def calculate_time(start, stop):
     difference = stop - start
     seconds = float(str(difference.total_seconds()))
     return str(datetime.timedelta(seconds=seconds)).split(".")[0]
- 
+  
 def portIngest():
-    i = 0
-    line = [str(), str()]
+    # define ingest list of strings
+    line = [str("")]*PLC_PORT_DEFINITIONS
     # opening PLC ports static datafile
     with open('plc-ports.dat') as f:
-        line[i] = f.readline()
-        while line != '':
+        # iterate over the lines of definitions
+        for i in range(0,PLC_PORT_DEFINITIONS):
+            # read line to ingest list
+            line[i] = f.readline()
+            # split line to name and number
             portName[i], portNum[i] = line[i].split(":", 1)
-            portName[int(portNum[i])] = portName[i]
         f.close()
- 
- 
+
 def first_check(host, port):
  
     if ping(host, port):
@@ -152,9 +171,9 @@ def first_check(host, port):
             # writes into the log file
             file.write(not_live)
         return False
- 
+
 def main():
- 
+   
     class bcolors:
         HEADER = '\033[95m'
         BLUE = '\033[94m'
@@ -165,28 +184,31 @@ def main():
         ENDC = '\033[0m'
         BOLD = '\033[1m'
         UNDERLINE = '\033[4m'
- 
+
     # plcd ASCII art
     print(bcolors.CYAN+"           __         __\n    ____  / /________/ /\n   / __ \/ / ___/ __  / \n  / /_/ / / /__/ /_/ /  \n / .___/_/\___/\__,_/   \n/_/                     \n"+bcolors.ENDC)
     # title & print
     welcomeMsg = bcolors.HEADER + bcolors.BOLD + "Developed by LibreCS, licensed under GNU GPLv3. Learn more and contribute at https://github.com/LibreCS/plcd" + bcolors.ENDC
     print(welcomeMsg+"\n\n")
- 
+
+    # ingest 'plc-ports'.dat
+    portIngest()
+
     # monitoring configuration & loop
     netLocationPLC = configure()
     while netLocationPLC == "error":
         netLocationPLC = configure()
- 
+    
     # parsing configuration output for host and port 
     hostParse, portParse =  netLocationPLC.split(":", 1)
     host = str(hostParse)
     port = int(portParse)
- 
+
     # main function to call functions
     monitor_start_time = datetime.datetime.now()
     monitoring_date_time = "Uptime monitoring started at: " + \
         str(monitor_start_time).split(".")[0]
- 
+
     # call first check function, decide loop path
     if first_check(host, port):
         # if true
@@ -201,15 +223,15 @@ def main():
             if not ping(host, port):
                 # if connection not acquired
                 # uptime tests every defined interval
- 
+                
                 time.sleep(60/DOWN_PING_FREQ)
- 
+
                 if (((i/DOWN_PING_FREQ) % DOWN_PRINT_INT) == 0):
                     downtimeMsg = str(int(i/DOWN_PING_FREQ)) + " .. offline"
                     print(downtimeMsg)
- 
+
                 i += 1
- 
+
             else:
                 # if connection is acquired
                 first_check(host, port)
@@ -221,10 +243,10 @@ def main():
         file.write(monitoring_date_time + "\n")
  
     while True:
- 
+       
         # infinite loop, monitoring connection
         if ping(host, port):
- 
+             
             # if ping received, continue at defined interval
             time.sleep(60/UP_PING_FREQ)
  
@@ -239,12 +261,12 @@ def main():
                 file.write(fail_msg + "\n")
  
             while not ping(host, port):
- 
+               
                 # infinite loop until ping returns
                 time.sleep(1)
  
             up_time = datetime.datetime.now()
- 
+             
             # after loop breaks, connection restored
             uptime_message = host + " connected again: " + str(up_time).split(".")[0]
  
@@ -255,7 +277,7 @@ def main():
             print(unavailablity_time)
  
             with open(FILE, "a") as file:
- 
+                 
                 # log entry for restoration time and downtime
                 file.write(uptime_message + "\n")
                 file.write(unavailablity_time + "\n")
