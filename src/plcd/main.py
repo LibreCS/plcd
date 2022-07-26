@@ -1,14 +1,12 @@
-from ctypes import sizeof
-from lib2to3.pygram import python_grammar_no_print_statement
+#from ctypes import sizeof
+#from lib2to3.pygram import python_grammar_no_print_statement
 import os
-import sys
+#import sys
 import socket
 import datetime
 import time
- 
 
 #=========== CONFIGURATION ===========================================
-
 # set monitoring frequency (pings/min)
 UP_PING_FREQ = 5
 # set monitoring frequency when down (pings/min)
@@ -20,11 +18,9 @@ PLC_PORT_DEFINITIONS = 50
 # maxium acceptable port for input and sniffing
 PORT_SCAN_MAX = 50000
 #=====================================================================
-
 # initial array definitions
 portName = [str("")]*PLC_PORT_DEFINITIONS
 portNum = [int(0)]*PLC_PORT_DEFINITIONS
-
 
 # setting log file name & dir
 FILE = os.path.join(os.getcwd(), "plc_uptime.log")
@@ -49,19 +45,19 @@ def configure():
     hostUsrIn = input(addressInMsg)
 
     if hostValid(hostUsrIn):
-        print(bcolors.ORANGE+"\nScanning...\n"+bcolors.ENDC)
+        print(bcolors.ORANGE + "\nScanning...\n" + bcolors.ENDC)
         portIndex = portSniff(hostUsrIn, portNum)
         if portIndex == "error:sniff":
-            print(bcolors.RED+"Error: No open ports found on host, try again\n"+bcolors.ENDC)
+            print(bcolors.RED + "Error: No open ports found on host, try again\n" + bcolors.ENDC)
             return "error"
         else:
-            print("\nController type "+bcolors.BOLD+str(portName[portIndex])+bcolors.ENDC+" found on TCP port "+str(portNum[portIndex])+"Connecting...")
-            return str(hostUsrIn)+":"+str(portNum[portIndex])
+            print("\nController type " + bcolors.BOLD + str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
+            return str(hostUsrIn) + ":" + str(portNum[portIndex])
 
     else:
         print("\n")
         if not hostValid(hostUsrIn):
-            print(bcolors.RED+"Error: PLC IP address invalid, try again"+bcolors.ENDC)
+            print(bcolors.RED + "Error: PLC IP address invalid, try again" + bcolors.ENDC)
         print("\n")
 
         return "error"
@@ -72,12 +68,14 @@ def hostValid(hostUsrIn):
 
     # check for 4 quartet length
     if len(hostParse) == 4:
-        # proceed
+        
         # interate on array length
         for i in hostParse:
+
             # check for out of bounds IP quartet
             if int(i) > 255:
                 return False
+
         # after quartet limits verified return true
         return True   
     else:
@@ -152,7 +150,7 @@ def first_check(host, port):
         live = "\nPLC connection acquired ... Monitoring...\n"
         print(live)
         connection_acquired_time = datetime.datetime.now()
-        acquiring_message = "Connection acquired for "+host+" at: " + \
+        acquiring_message = "Connection acquired for " + host + " at: " + \
             str(connection_acquired_time).split(".")[0]
         print(acquiring_message)
  
@@ -186,10 +184,10 @@ def main():
         UNDERLINE = '\033[4m'
 
     # plcd ASCII art
-    print(bcolors.HEADER+"           __         __\n    ____  / /________/ /\n   / __ \/ / ___/ __  / \n  / /_/ / / /__/ /_/ /  \n / .___/_/\___/\__,_/   \n/_/                     \n"+bcolors.ENDC)
+    print(bcolors.HEADER + "           __         __\n    ____  / /________/ /\n   / __ \/ / ___/ __  / \n  / /_/ / / /__/ /_/ /  \n / .___/_/\___/\__,_/   \n/_/                     \n" + bcolors.ENDC)
     # title & print
     welcomeMsg = bcolors.HEADER + bcolors.BOLD + "Developed by LibreCS, licensed under GNU GPLv3. Learn more and contribute at https://github.com/LibreCS/plcd" + bcolors.ENDC
-    print(welcomeMsg+"\n\n")
+    print(welcomeMsg + "\n\n")
 
     # ingest 'plc-ports'.dat
     portIngest()
@@ -224,10 +222,10 @@ def main():
                 # if connection not acquired
                 # uptime tests every defined interval
                 
-                time.sleep(60/DOWN_PING_FREQ)
+                time.sleep(60 / DOWN_PING_FREQ)
 
-                if (((i/DOWN_PING_FREQ) % DOWN_PRINT_INT) == 0):
-                    downtimeMsg = str(int(i/DOWN_PING_FREQ)) + " .. offline"
+                if (((i / DOWN_PING_FREQ) % DOWN_PRINT_INT) == 0):
+                    downtimeMsg = str(int(i / DOWN_PING_FREQ)) + " .. offline"
                     print(downtimeMsg)
 
                 i += 1
@@ -248,7 +246,7 @@ def main():
         if ping(host, port):
              
             # if ping received, continue at defined interval
-            time.sleep(60/UP_PING_FREQ)
+            time.sleep(60 / UP_PING_FREQ)
  
         else:
             # if false: fail message
