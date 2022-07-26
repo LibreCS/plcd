@@ -99,7 +99,7 @@ setup(
     # keywords="sample, setuptools, development",  # Optional
     # When your source code is in a subdirectory under the project root, e.g.
     # `src/`, it is necessary to specify the `package_dir` argument.
-    package_dir={"": "src"},  # Optional
+    # package_dir={"": "src"},  # Optional
     # You can just specify package directories manually here if your project is
     # simple. Or you can use find_packages().
     #
@@ -165,8 +165,7 @@ setup(
     # issues, where the source is hosted, where to say thanks to the package
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
-    project_urls={  # Optional
-        "Bug Reports": "https://github.com/LibreCS/plcd/issues",
-        "Source": "https://github.com/LibreCS/plcd",
-    },
+    #project_urls={  # Optional
+    #    "Source": "https://github.com/LibreCS/plcd",
+    #},
 )
