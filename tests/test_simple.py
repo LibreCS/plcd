@@ -4,7 +4,7 @@
 
 import unittest
 
-from sample.main import add_one
+from plcd.main import add_one
 
 
 class TestSimple(unittest.TestCase):

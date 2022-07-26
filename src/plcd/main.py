@@ -122,7 +122,7 @@ def portIngest():
         line[i] = f.readline()
         while line != '':
             portName[i], portNum[i] = line[i].split(":", 1)
-            portName[portNum[i]] = portName[i]
+            portName[int(portNum[i])] = portName[i]
         f.close()
  
  
