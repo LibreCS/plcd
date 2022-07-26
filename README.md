@@ -4,6 +4,7 @@
 
 # `$ pip install plcd`
 
+![Build Test](https://github.com/LibreCS/plcd/actions/workflows/test.yml/badge.svg) ![Release](https://github.com/LibreCS/plcd/actions/workflows/release.yml/badge.svg)
 
 ## Features
 - Uptime detection, monitoring, and logging
