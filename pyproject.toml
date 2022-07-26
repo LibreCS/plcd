@@ -4,19 +4,5 @@
 requires = ["setuptools>=43.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project]
-name = "plcd"
-version = "0.0.1"
-authors = [ { name="LibreCS"}, ]
-description = "A lightweight PLC uptime monitor"
-readme = "README.md"
-license = { file="LICENSE" }
-requires-python = ">=3.7"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: GPL License",
-    "Operating System :: OS Independent",
-]
-
 [project.urls]
 "Homepage" = "https://github.com/LibreCS/plcd/"
