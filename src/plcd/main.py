@@ -49,12 +49,13 @@ def configure():
     hostUsrIn = input(addressInMsg)
 
     if hostValid(hostUsrIn):
+        print(bcolors.ORANGE+"\nScanning...\n"+bcolors.ENDC)
         portIndex = portSniff(hostUsrIn, portNum)
         if portIndex == "error:sniff":
-            print(bcolors.RED+"Error: No open ports found on host, try again"+bcolors.ENDC)
+            print(bcolors.RED+"Error: No open ports found on host, try again\n"+bcolors.ENDC)
             return "error"
         else:
-            print("\nController type "+str(portName[portIndex])+" found on TCP port "+str(portNum[portIndex])+"Connecting...")
+            print("\nController type "+bcolors.BOLD+str(portName[portIndex])+bcolors.ENDC+" found on TCP port "+str(portNum[portIndex])+"Connecting...")
             return str(hostUsrIn)+":"+str(portNum[portIndex])
 
     else:
@@ -95,7 +96,7 @@ def portValid(portUsrIn):
 def ping(host, port):
     # to ping a particular IP
     try:
-        socket.setdefaulttimeout(5)
+        socket.setdefaulttimeout(0.1)
  
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # AF_INET: address family
@@ -115,17 +116,16 @@ def ping(host, port):
 def portSniff(inputAddress, portNum):
     # status variable definitions
     sniffStatus = [False]*PLC_PORT_DEFINITIONS
-    portsOpen = 0
 
     # sniffing all given ports
     for portIndex in range(0,PLC_PORT_DEFINITIONS):
         if ping(str(inputAddress), int(portNum[portIndex])):
             sniffStatus[portIndex] = True
-            portsOpen =+ 1
             return portIndex
+        else:
+            time.sleep(0.01)
 
-    if portsOpen == 0:
-        return "error:sniff"
+    return "error:sniff"
 
 def calculate_time(start, stop):
     difference = stop - start
@@ -186,7 +186,7 @@ def main():
         UNDERLINE = '\033[4m'
 
     # plcd ASCII art
-    print(bcolors.CYAN+"           __         __\n    ____  / /________/ /\n   / __ \/ / ___/ __  / \n  / /_/ / / /__/ /_/ /  \n / .___/_/\___/\__,_/   \n/_/                     \n"+bcolors.ENDC)
+    print(bcolors.HEADER+"           __         __\n    ____  / /________/ /\n   / __ \/ / ___/ __  / \n  / /_/ / / /__/ /_/ /  \n / .___/_/\___/\__,_/   \n/_/                     \n"+bcolors.ENDC)
     # title & print
     welcomeMsg = bcolors.HEADER + bcolors.BOLD + "Developed by LibreCS, licensed under GNU GPLv3. Learn more and contribute at https://github.com/LibreCS/plcd" + bcolors.ENDC
     print(welcomeMsg+"\n\n")
