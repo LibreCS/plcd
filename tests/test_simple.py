@@ -3,11 +3,10 @@
 # setup.py that excludes installing the "tests" package
 
 import unittest
+from plcd.main import portSniff
 
 SNIFF_TEST_IP = "185.199.109.153"
 SNIFF_TEST_PORT = 443
-
-from plcd.main import portSniff
 
 class SniffTest(unittest.TestCase):
 
