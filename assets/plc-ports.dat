@@ -1,0 +1,50 @@
+AB (modern):44818
+AB (legacy):2222
+Beckhoff PC:48898
+C-more HMI:9999
+Danfoss ECL Apex:5050
+FATEK FB Series:500
+GE Fanus Series:18245
+GE SRTP:18245
+GE SRTP:18246
+GE QuickPanels:57176
+Hitachi EHV Series:3004
+Keyence KV-5000:8501
+Korenix 6550:502
+Koyo Ethernet:28784
+LS Glofa FEnet:2004
+LS XGB FEnet:2004
+Memobus:502
+Mitsubishi FX:1025
+Mitsubishi FX3u:5001
+Mitsubishi M Series:4999
+Mitsubishi QJ71E71:5002
+MODBUS TCP/IP:502
+Omron PLC:9600
+Panasonic FP:9094
+Panasonic FP2:8500
+Red Lion HMI:789
+SAIA S-Bus:5050
+Schleicher XCX 300:20547
+Siemens S7:102
+Unitronics 51:20256
+Unitronics 52:502
+Unitronics S3:20257
+Wago CODESYS:2455
+Yaskawa MP Series:10000
+Yaskawa MP2300Siec:44818
+Yaskawa SMC 3010:23
+Yokogawa FA-M3:12289
+{null port}:0
+HTTP:80
+HTTPS:443
+FTP (data):20
+FTP (command):21
+SSH:20
+SMTP:25
+DNS:53
+BGP:179
+IMAP:143
+OpenVPN:1194
+NFS:2049
+AWS (remote):4195
