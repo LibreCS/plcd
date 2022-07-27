@@ -15,12 +15,23 @@
 - Pin 22.04 or higher `# apt-get install python3-pip`
 - Network connection to PLC
 
+## Usage
+Install using pip:
+```bash
+$ pip install plcd
+```
+Run as a python package:
+```bash
+$ python -m plcd
+```
+
 ## Supported Controllers
 All major PLC protocols, see the [list of controllers](https://github.com/LibreCS/plcd/blob/main/src/plcd/plc-ports.dat) for details
 
 ## Build from source
 #### Linux/macOS
 ```bash
+git clone https://github.com/LibreCS/plcd
 cd plcd
 python3 -m pip install --upgrade build
 python3 -m build
@@ -28,6 +39,7 @@ python3 -m build
 
 #### Windows
 ```bash
+git clone https://github.com/LibreCS/plcd
 cd plcd
 py -m pip install --upgrade build
 py -m build
