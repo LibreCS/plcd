@@ -1,6 +1,6 @@
 # plcd - A lightweight PLC uptime monitor
 
-![logo](assets/logo_ascii.png)
+![logo](https://github.com/LibreCS/plcd/blob/stable/assets/logo_ascii.png)
 
 # `$ pip install plcd`
 
