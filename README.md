@@ -4,6 +4,8 @@
 
 # `$ pip install plcd`
 
+[Package on PyPI](https://pypi.org/project/plcd/)
+
 ![Build Test](https://github.com/LibreCS/plcd/actions/workflows/test.yml/badge.svg) ![Release](https://github.com/LibreCS/plcd/actions/workflows/release.yml/badge.svg)
 
 ## Features
