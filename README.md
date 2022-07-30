@@ -20,11 +20,11 @@
 ## Usage
 Install using pip:
 ```bash
-$ pip install plcd
+$ python3 -m pip install --upgrade plcd
 ```
 Run as a python package:
 ```bash
-$ python -m plcd
+$ python3 -m plcd
 ```
 
 ## Supported Controllers
