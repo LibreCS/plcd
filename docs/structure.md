@@ -1,3 +1,8 @@
+
+# plcd Package Docs
+
+## Package Structure
+```
 plcd
  - .github/workflows
     - release.yml
@@ -8,10 +13,11 @@ plcd
  - docs
     - structure.txt
  - src
-    - __init__.py
-    - __main__.py
-    - ping.py
-    - plc-port.dat
+    - plcd
+        - __init__.py
+        - __main__.py
+        - ping.py
+        - plc-ports.dat
  - tests
  .gitignore
  LICENSE
@@ -22,3 +28,4 @@ plcd
  setup.cfg
  setup.py
  tox.ini
+```
