@@ -1,4 +1,4 @@
-from plcd.ping import main
+from src.plcd.ping import main
 
 if __name__ == '__main__':
     
