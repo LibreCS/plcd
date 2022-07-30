@@ -25,7 +25,7 @@ portName = [str("")]*PLC_PORT_DEFINITIONS
 portNum = [int(0)]*PLC_PORT_DEFINITIONS
 
 # setting log file name & dir
-FILE = os.path.join(os.getcwd(), "plc_uptime.log")
+FILE = os.path.join(os.getcwd(), "data/plc_uptime.log")
 
 def configure():
 
@@ -137,7 +137,7 @@ def portIngest():
     line = [str("")]*PLC_PORT_DEFINITIONS
     # opening PLC ports static datafile
     fileDir = os.path.dirname(os.path.realpath('__file__'))
-    with open(os.path.join(fileDir, 'assets/plc-ports.dat')) as f:
+    with open(os.path.join(fileDir, 'plcd/data/plc-ports.dat')) as f:
         # iterate over the lines of definitions
         for i in range(0,PLC_PORT_DEFINITIONS):
             # read line to ingest list
