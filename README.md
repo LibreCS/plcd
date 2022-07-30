@@ -2,11 +2,11 @@
 
 ![logo](https://github.com/LibreCS/plcd/blob/stable/assets/logo_ascii.png)
 
-# `$ pip install plcd`
+# `$ python3 -m pip install --upgrade plcd`
 
 [Package on PyPI](https://pypi.org/project/plcd/)
 
-![Build Test](https://github.com/LibreCS/plcd/actions/workflows/test.yml/badge.svg) ![Release](https://github.com/LibreCS/plcd/actions/workflows/release.yml/badge.svg) ![GitHub](https://img.shields.io/github/license/LibreCS/plcd) ![GitHub last commit](https://img.shields.io/github/last-commit/LibreCS/plcd)
+![Build Test](https://github.com/LibreCS/plcd/actions/workflows/test.yml/badge.svg) ![GitHub](https://img.shields.io/github/license/LibreCS/plcd) ![GitHub last commit](https://img.shields.io/github/last-commit/LibreCS/plcd)
 
 ## Features
 - Uptime detection, monitoring, and logging
