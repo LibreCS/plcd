@@ -136,8 +136,8 @@ def portIngest():
     # define ingest list of strings
     line = [str("")]*PLC_PORT_DEFINITIONS
     # opening PLC ports static datafile
-    fileDir = os.path.dirname(os.path.realpath('__file__'))
-    with open(os.path.join(fileDir, 'assets/plc-ports.dat')) as f:
+    fileDir = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(fileDir, 'plc-ports.dat')) as f:
         # iterate over the lines of definitions
         for i in range(0,PLC_PORT_DEFINITIONS):
             # read line to ingest list
