@@ -2,7 +2,7 @@
 
 ![logo](https://github.com/LibreCS/plcd/blob/stable/assets/logo_ascii.png)
 
-# `$ pip install plcd`
+# `$ python3 -m pip install --upgrade plcd`
 
 [Package on PyPI](https://pypi.org/project/plcd/)
 
