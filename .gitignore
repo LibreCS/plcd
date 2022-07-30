@@ -8,9 +8,6 @@ __pycache__/
 *.so
 *~
 
-# mac stuff?
-.DS_Store
-
 # due to using tox and pytest
 .tox
 .cache
