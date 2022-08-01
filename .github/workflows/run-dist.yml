@@ -1,7 +1,9 @@
 
 name: Run Distribution
 
-on: [push, pull_request]
+on:
+  release:
+    types: [published]
 
 jobs:
   test:
