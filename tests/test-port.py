@@ -1,6 +1,6 @@
 
 import unittest
-from plcd.ping import portValid
+from src.plcd.ping import portValid
 
 PORT = [0, 50001, 443]
 PORT_STATUS = [False, False, True]
