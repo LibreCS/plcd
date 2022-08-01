@@ -15,7 +15,7 @@ class SniffTest(unittest.TestCase):
     portIngest()
 
     def test_portIngest(self):
-        self.assertEqual(portSniff(SNIFF_TEST_IP), SNIFF_TEST_PORT)
+        self.assertEqual(portSniff(SNIFF_TEST_IP, portNum), SNIFF_TEST_PORT)
 
 
 if __name__ == '__main__':
