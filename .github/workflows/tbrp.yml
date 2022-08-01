@@ -32,82 +32,82 @@ jobs:
     name: Build Test
     needs: test
     strategy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.10
-    - name: Install pip
-      run: |
-        python3 -m pip install --upgrade pip
-    - name: Install build
-      run: |
-        python3 -m pip install --upgrade build
-    - name: Build package
-      run: |
-        python3 -m build
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.10
+      - name: Install pip
+        run: |
+          python3 -m pip install --upgrade pip
+      - name: Install build
+        run: |
+          python3 -m pip install --upgrade build
+      - name: Build package
+        run: |
+          python3 -m build
 
   build-release:
     name: Build and draft release
     needs: [test, build]
     strategy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.10
-    - name: Install pip
-      run: |
-        python3 -m pip install --upgrade pip
-    - name: Install build
-      run: |
-        python3 -m pip install --upgrade build
-    - name: Build package
-      run: |
-        python3 -m build
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        body: |
-          Changes in release ${{ github.ref }}
-          - 
-          - 
-        draft: true
-        prerelease: false
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.10
+      - name: Install pip
+        run: |
+          python3 -m pip install --upgrade pip
+      - name: Install build
+        run: |
+          python3 -m pip install --upgrade build
+      - name: Build package
+        run: |
+          python3 -m build
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: |
+            Changes in release ${{ github.ref }}
+            - 
+            - 
+          draft: true
+          prerelease: false
 
   build-publish:
     name: Build and publish to pypi
     needs: [test, build]
     strategy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.10
-    - name: Install pip
-      run: |
-        python3 -m pip install --upgrade pip
-    - name: Install build
-      run: |
-        python3 -m pip install --upgrade build
-    - name: Build package
-      run: |
-        python3 -m build
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        password: ${{ secrets.PYPI_PASSWORD }}
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.10
+      - name: Install pip
+        run: |
+          python3 -m pip install --upgrade pip
+      - name: Install build
+        run: |
+          python3 -m pip install --upgrade build
+      - name: Build package
+        run: |
+          python3 -m build
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_PASSWORD }}
