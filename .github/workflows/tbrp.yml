@@ -1,6 +1,5 @@
 
 name: Test, Build, Release, Publish
-description: Sequenced testing, building, release drafting, and pypi publishing on tagged commit
 
 on:
   push:
