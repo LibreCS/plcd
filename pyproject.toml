@@ -6,6 +6,17 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[project]
+name = "plcd"
+# version = "0.1.4"
+authors = [
+  { name="LibreCS" },
+]
+description = "A lightweight PLC uptime monitor"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+
 # uncomment for setuptools
 # requires = ["setuptools>=43.0.0", "wheel"]
 # build-backend = "setuptools.build_meta"
