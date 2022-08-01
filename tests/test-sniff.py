@@ -1,6 +1,6 @@
 
 import unittest
-from plcd.ping import portSniff
+from src.plcd.ping import portSniff
 
 SNIFF_TEST_IP = "185.199.109.153"
 SNIFF_TEST_PORT = 443
