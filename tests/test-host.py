@@ -7,7 +7,7 @@ HOST_STATUS = [True, False, False, False, False]
 
 class HostTest(unittest.TestCase):
  
-    def test_portIngest(self):
+    def test_hostValid(self):
     
         for i in HOST:
             self.assertEqual(hostValid(HOST[i]), HOST_STATUS[i])
