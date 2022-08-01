@@ -29,15 +29,6 @@ portNum = [int(0)]*PLC_PORT_DEFINITIONS
 # setting log file name & dir
 FILE = os.path.join(os.getcwd(), "data/plc_uptime.log")
 
-def process_input(msg):
-    line = input(msg)
-    while True:
-        try:
-            line = input(msg)
-            return line
-        except EOFError:
-            return TEST_IP
-
 def configure():
 
     class bcolors:
@@ -54,8 +45,15 @@ def configure():
 
     addressInMsg = "Enter PLC plant IP address: "
 
-    # get host input
-    hostUsrIn = process_input(addressInMsg)
+    # get user input for host address
+    while True:
+        try:
+            hostUsrIn = input(addressInMsg)
+            if hostValid(hostUsrIn):
+                break
+        except EOFError:
+            hostUsrIn = TEST_IP
+            break
 
     if hostValid(hostUsrIn):
         print(bcolors.ORANGE + "\nScanning...\n" + bcolors.ENDC)
