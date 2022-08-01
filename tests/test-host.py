@@ -1,0 +1,17 @@
+
+import unittest
+from plcd.main import hostValid
+
+HOST = ["10.0.0.1", "256.1.1.1", "-1.1.1.1", "1.1.1", "1.1.1.1.1"]
+HOST_STATUS = [True, False, False, False, False]
+
+class HostTest(unittest.TestCase):
+ 
+    def test_portIngest(self):
+    
+        for i in HOST:
+            self.assertEqual(hostValid(HOST[i]), HOST_STATUS[i])
+
+
+if __name__ == '__main__':
+    unittest.main()
