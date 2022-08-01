@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "plcd"
-# version = "0.1.4"
+version = "0.1.4"
 authors = [
   { name="LibreCS" },
 ]
