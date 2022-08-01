@@ -29,7 +29,6 @@ jobs:
 
   test:
     name: Script Test
-    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -53,7 +52,6 @@ jobs:
 
   build:
     name: Build Test
-    needs: [lint, test]
     runs-on: ubuntu-latest
     strategy:
       matrix:
