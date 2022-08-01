@@ -1,15 +1,7 @@
 name: Test and Lint v2
 
-on: 
-  push:
-    branch:
-      stable
-  pull-request:
-    branch:
-      stable
-  workflow_dispatch:
+on: [push, pull_request]
     
-
 jobs:
   lint:
     runs-on: ubuntu-latest
