@@ -1,9 +1,10 @@
-name: Test and Lint v2
+name: Test and Lint
 
 on: [push, pull_request]
     
 jobs:
   lint:
+    name: Lint Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,6 +28,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
   test:
+    name: Script Test
     needs: lint
     runs-on: ubuntu-latest
     strategy:
@@ -48,3 +50,28 @@ jobs:
           # pytest tests/test-sniff.py -s
           # pytest tests/test-host.py -s
           # pytest tests/test-port.py -s
+
+  build:
+    name: Build Test
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.7', '3.8', '3.9', '3.10']
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python }}
+    - name: Install pip
+      run: |
+        python3 -m pip install --upgrade pip
+    - name: Install build
+      run: |
+        python3 -m pip install --upgrade build
+    - name: Build package
+      run: |
+        python3 -m build
+        
