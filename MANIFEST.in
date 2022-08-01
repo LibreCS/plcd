@@ -1,5 +1,0 @@
-include tox.ini
-recursive-include assets *.png
-recursive-include src *.dat
-recursive-include tests *.py
-recursive-include workflows *.yml
