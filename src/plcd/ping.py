@@ -6,7 +6,7 @@ import socket
 import datetime
 import time
 
-__version__ = "0.0.2"
+__version__ = "0.1.3"
 
 #=========== CONFIGURATION ===========================================
 # set monitoring frequency (pings/min)
@@ -19,6 +19,8 @@ DOWN_PRINT_INT = 20
 PLC_PORT_DEFINITIONS = 50
 # maxium acceptable port for input and sniffing
 PORT_SCAN_MAX = 50000
+# CI testing host IP
+TEST_IP = "185.199.109.153"
 #=====================================================================
 # initial array definitions
 portName = [str("")]*PLC_PORT_DEFINITIONS
@@ -26,6 +28,15 @@ portNum = [int(0)]*PLC_PORT_DEFINITIONS
 
 # setting log file name & dir
 FILE = os.path.join(os.getcwd(), "data/plc_uptime.log")
+
+def process_input(msg):
+    line = input(msg)
+    while True:
+        try:
+            line = input(msg)
+            return line
+        except EOFError:
+            return TEST_IP
 
 def configure():
 
@@ -44,7 +55,7 @@ def configure():
     addressInMsg = "Enter PLC plant IP address: "
 
     # get host input
-    hostUsrIn = input(addressInMsg)
+    hostUsrIn = process_input(addressInMsg)
 
     if hostValid(hostUsrIn):
         print(bcolors.ORANGE + "\nScanning...\n" + bcolors.ENDC)
