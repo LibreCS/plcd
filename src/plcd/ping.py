@@ -27,7 +27,7 @@ portName = [str("")]*PLC_PORT_DEFINITIONS
 portNum = [int(0)]*PLC_PORT_DEFINITIONS
 
 # setting log file name & dir
-FILE = os.path.join(os.getcwd(), "data/plc_uptime.log")
+FILE = os.path.join(os.getcwd(), "plc_uptime.log")
 
 def configure():
 
