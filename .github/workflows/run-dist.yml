@@ -23,3 +23,7 @@ jobs:
       run: python3 -m pip install --upgrade plcd
     - name: Run plcd
       run: python3 -m plcd
+    - name: no timeout
+      run: timeout 10 python ./sleep.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+    - name: timeout # We add or so that return code is not none-zero which causes pipeline to fail
+      run: timeout 1 python ./sleep.py || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
