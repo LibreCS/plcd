@@ -1,6 +1,6 @@
 
 
-name: Run Distribution
+name: Check Distribution
 
 on:
   workflow_dispatch:
@@ -21,5 +21,3 @@ jobs:
       run: python3 -m pip install --upgrade pip
     - name: Install plcd
       run: python3 -m pip install --upgrade plcd
-    - name: Run plcd
-      run: python3 -m plcd
