@@ -1,8 +1,8 @@
 
 import unittest
-from src.plcd.ping import ping()
+from src.plcd.ping import ping
 from src.plcd.ping import portSniff
-from src.plcd.ping import configure()
+from src.plcd.ping import configure
 
 
 
