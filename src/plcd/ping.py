@@ -54,23 +54,29 @@ def configure():
         except EOFError:
             hostUsrIn = TEST_IP
             break
-
-    return scan(bcolors, hostUsrIn)
-
-
-def scan(bcolors, hostUsrIn):
+        
     if hostValid(hostUsrIn):
         print(bcolors.ORANGE + "\nScanning...\n" + bcolors.ENDC)
         portIndex = portSniff(hostUsrIn, portNum)
         if portIndex != "error:sniff":
             print("\nController type " + bcolors.BOLD +
-                  str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
+                str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
             return str(hostUsrIn) + ":" + str(portNum[portIndex])
+
     print(bcolors.RED + "Error: No open ports found on host. Wait for response (w), or enter a new host (n)?" + bcolors.ENDC)
     retry_response = input()
     if retry_response.casefold() == "w".casefold():
-        return scan(bcolors, hostUsrIn)
+        while True:
+            print(bcolors.ORANGE + "\nScanning...\n" + bcolors.ENDC)
+            portIndex = portSniff(hostUsrIn, portNum)
+            if portIndex != "error:sniff": break
+
+        print("\nController type " + bcolors.BOLD + str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
+        return str(hostUsrIn) + ":" + str(portNum[portIndex])
     return "error"
+
+
+
 
 
 def hostValid(hostUsrIn):
