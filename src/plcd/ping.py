@@ -71,20 +71,6 @@ def scan(bcolors, hostUsrIn):
     if retry_response.casefold() == "w".casefold():
         return scan(bcolors, hostUsrIn)
     return "error"
-    #     if portIndex == "error:sniff":
-    #         print(bcolors.RED + "Error: No open ports found on host, try again\n" + bcolors.ENDC)
-    #         return "error"
-    #     else:
-    #         print("\nController type " + bcolors.BOLD + str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
-    #         return str(hostUsrIn) + ":" + str(portNum[portIndex])
-
-    # else:
-    #     print("\n")
-    #     if not hostValid(hostUsrIn):
-    #         print(bcolors.RED + "Error: PLC IP address invalid, try again" + bcolors.ENDC)
-    #     print("\n")
-
-    #     return "error"
 
 
 def hostValid(hostUsrIn):
