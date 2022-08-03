@@ -44,7 +44,7 @@ def configure():
         BOLD = '\033[1m'
         UNDERLINE = '\033[4m'
 
-    addressInMsg = "Enter PLC plant IP address: "
+    addressInMsg = "\nEnter PLC plant IP address: "
     hostUsrIn = input(addressInMsg)
     # get user input for host address
     while True:
@@ -63,20 +63,17 @@ def configure():
                 str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
             return str(hostUsrIn) + ":" + str(portNum[portIndex])
 
-    print(bcolors.RED + "Error: No open ports found on host. Wait for response (w), or enter a new host (n)?" + bcolors.ENDC)
-    retry_response = input()
+    portError = bcolors.RED + "Error: No open ports found on host. Wait for response (w), or enter a new host (n)? " + bcolors.ENDC
+    retry_response = input(portError)
     if retry_response.casefold() == "w".casefold():
+        print(bcolors.ORANGE + "\nWaiting for host...\n" + bcolors.ENDC)
         while True:
-            print(bcolors.ORANGE + "\nScanning...\n" + bcolors.ENDC)
             portIndex = portSniff(hostUsrIn, portNum)
             if portIndex != "error:sniff": break
 
         print("\nController type " + bcolors.BOLD + str(portName[portIndex]) + bcolors.ENDC + " found on TCP port " + str(portNum[portIndex]) + "Connecting...")
         return str(hostUsrIn) + ":" + str(portNum[portIndex])
     return "error"
-
-
-
 
 
 def hostValid(hostUsrIn):
