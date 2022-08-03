@@ -7,7 +7,7 @@ import socket
 import datetime
 import time
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 # =========== CONFIGURATION ===========================================
 # set monitoring frequency (pings/min)
