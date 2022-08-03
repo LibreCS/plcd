@@ -47,8 +47,8 @@ jobs:
       - name: Test with pytest
         run: |
           # pytest tests/test-sniff.py -s
-          pytest tests/test-host.py -s
-          pytest tests/test-port.py -s
+          # pytest tests/test-host.py -s
+          # pytest tests/test-port.py -s
 
   build:
     name: Build Test
