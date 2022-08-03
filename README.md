@@ -6,7 +6,7 @@
 
 [Package on PyPI](https://pypi.org/project/plcd/)
 
-![Build Test](https://github.com/LibreCS/plcd/actions/workflows/test-lint.yml/badge.svg) ![Dist Test](https://github.com/LibreCS/plcd/actions/workflows/run-dist.yml/badge.svg) ![Test Build Release Publish](https://github.com/LibreCS/plcd/actions/workflows/tbrp.yml/badge.svg) ![GitHub](https://img.shields.io/github/license/LibreCS/plcd) ![GitHub last commit](https://img.shields.io/github/last-commit/LibreCS/plcd)
+![Build Test](https://github.com/LibreCS/plcd/actions/workflows/test-lint.yml/badge.svg) ![Dist Check](https://github.com/LibreCS/plcd/actions/workflows/check-dist.yml/badge.svg) ![Test Build Release Publish](https://github.com/LibreCS/plcd/actions/workflows/tbrp.yml/badge.svg) ![GitHub](https://img.shields.io/github/license/LibreCS/plcd) ![GitHub last commit](https://img.shields.io/github/last-commit/LibreCS/plcd)
 
 ## Features
 - Uptime detection, monitoring, and logging
