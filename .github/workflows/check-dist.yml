@@ -1,6 +1,6 @@
 
 
-name: Run Distribution
+name: Check Distribution
 
 on:
   workflow_dispatch:
