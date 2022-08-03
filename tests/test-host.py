@@ -2,8 +2,8 @@
 import unittest
 from src.plcd.ping import hostValid
 
-HOST = ["10.0.0.1", "256.1.1.1", "-1.1.1.1", "1.1.1", "1.1.1.1.1"]
-HOST_STATUS = [True, False, False, False, False]
+HOST = ["10.0.0.1", "256.1.1.1", "1.1.1", "1.1.1.1.1"]
+HOST_STATUS = [True, False, False, False]
 
 class HostTest(unittest.TestCase):
  
